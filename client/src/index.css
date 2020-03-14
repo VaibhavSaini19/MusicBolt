@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap');
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +8,36 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Raleway', sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+/* #CF6150: Red-white */
+/* #AD95CF: Purple-white */
+/* #F0C559: Yellow-white */
+.hero-gradient{
+  height: 100vh;
+  /* background-image: radial-gradient(#f64f59 0%, #c471ed 90%, #12c2e9 100%); */
+  background-image: radial-gradient(circle at 75% 75%, #7F7FD5, #86A8E7, #91eae4);
+}
+
+.tagline{
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1em;
+}
+.tagline-helper{
+  font-size: 1.2rem;
+}
+.cta-grp {
+  
+}
+.cta-grp .col{
+  padding: 0;
 }
