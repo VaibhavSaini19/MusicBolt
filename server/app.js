@@ -16,14 +16,14 @@ app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) =>
-  res.json({
-    title: 'Songs App',
-    songs
-  })
-);
 
-app.use('/api/', require('./routes/index'));
+// Routes:
+// Home
+app.use('/', require('./routes/index'));
+// Users
+app.use('/users', require('./routes/users'));
+// Spotify API, 
+app.use('/songs/', require('./routes/songs'));
 
 // Listen to req
 const PORT = process.env.PORT || 5000;

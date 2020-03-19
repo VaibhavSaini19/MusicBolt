@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container{
+  padding: 0 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/* #CF6150: Red-white */
+/* #AD95CF: Purple-white */
+/* #F0C559: Yellow-white */
+.hero-gradient{
+  height: 100vh;
+  /* background-image: radial-gradient(#f64f59 0%, #c471ed 90%, #12c2e9 100%); */
+  background-image: radial-gradient(circle at 75% 75%, #7F7FD5, #86A8E7, #91eae4);
 }
 
-.App-link {
-  color: #61dafb;
+.tagline{
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1em;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tagline-helper{
+  font-size: 1.2rem;
+}
+.cta-grp {
+  
+}
+.cta-grp .col{
+  padding: 0;
 }
