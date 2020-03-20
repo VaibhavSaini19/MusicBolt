@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 function Header(){
     return (
@@ -20,19 +22,19 @@ function Header(){
             <div className="collapse navbar-collapse " id="navbarNav">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item mr-5">
-                        <div  className="nav-link" >
+                        <Link to={'/'} className="nav-link" >
                             Home
-                        </div>
+                        </Link>
                     </li>
                     <li className="nav-item mr-5">
-                        <div  className="nav-link" >
+                        <Link to={'/about'} className="nav-link" >
                             About
-                        </div>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <div className="nav-link" >
+                        <Link to={'users/login'} className="nav-link" >
                             Log In
-                        </div>
+                        </Link>
                     </li>
                 </ul>
             </div>

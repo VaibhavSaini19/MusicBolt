@@ -1,18 +1,32 @@
 /* Load the HTTP library */
 const express = require('express');
 const http = require("http");
+const mongoose = require('mongoose');
+const db = require('./config/keys').MongoURI;
 const songs = require('./Songs');
 
 const logger = require('./middleware/logger')
 
-/* Create an HTTP server to handle responses */
+
+/*--------------------------------Create an HTTP server to handle responses--------------------------------*/
+// Connect to Mongo
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.error(err));
 
 const app = express();
 
-//Init middleware
+// Init middleware
 app.use(logger);
 
-// Define routes
+// Allow CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+// Bodyparser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
