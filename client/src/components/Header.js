@@ -32,7 +32,7 @@ function Header(){
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={'users/login'} className="nav-link" >
+                        <Link to={'/users/login'} className="nav-link" >
                             Log In
                         </Link>
                     </li>
