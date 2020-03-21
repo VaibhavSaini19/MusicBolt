@@ -1,8 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { getUser, removeUserSession } from '../Utils/Common';
+import { Link, Redirect } from 'react-router-dom';
 
 
 function Header(){
+
+    const user = getUser();
+
+    // handle click event of logout button
+    const handleLogout = () => {
+        removeUserSession();
+    }
+
     return (
         <nav className="navbar navbar-expand-lg px-5">
             <div className="navbar-brand" >
@@ -32,9 +41,13 @@ function Header(){
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to={'/users/login'} className="nav-link" >
-                            Log In
-                        </Link>
+                        {user && <><button type="button" className="btn btn-danger" onClick={handleLogout} value="Logout">Logout</button>
+                                </>}
+                        {!user && <><Link to={'/users/login'} className="nav-link" >
+                                        Log In
+                                    </Link>
+                                </>}
+                                                       
                     </li>
                 </ul>
             </div>

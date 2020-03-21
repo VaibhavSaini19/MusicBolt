@@ -2,8 +2,12 @@
 const express = require('express');
 const http = require("http");
 const mongoose = require('mongoose');
-const db = require('./config/keys').MongoURI;
+const cors = require('cors');
 const songs = require('./Songs');
+const jwt = require('jsonwebtoken');
+
+require('dotenv').config();
+const db = require('./config/keys').MongoURI;
 
 const logger = require('./middleware/logger')
 
@@ -16,15 +20,9 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
 
 const app = express();
 
-// Init middleware
-app.use(logger);
-
-// Allow CORS
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// Init middlewares
+app.use(logger);                    // Logger
+app.use(cors());                    // CORS
 
 // Bodyparser
 app.use(express.json());
