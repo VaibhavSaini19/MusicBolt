@@ -2,10 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "App.js",
   "scripts": {
-    "start": "node App",
-    "dev": "nodemon App"
+    "start": "nodemon App"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +16,12 @@
     "cors": "^2.8.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^6.4.0",
+    "formidable": "^1.2.2",
     "express-session": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "mongoose": "^5.9.5",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
