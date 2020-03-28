@@ -17,19 +17,19 @@ const Landing = () => {
 						<div className="row h-100 align-items-center">
 							<div className="row mx-0">
 								<div className="display-4 font-weight-bold mb-5">
-									Inspiring the next wave in <span className="text-primary">Music</span>
+									Music, that matches your <span className="text-primary">GROOVE</span>
 								</div>
 								<h3 className="text-muted">Favourite Artists. Hottest Tracks</h3>
 							</div>
 							<div className="row mx-0">
+								<a href="#howItWorksSection" className="btn btn-lg btn-outline-primary mr-5 btn-pill">
+									How it works? <i className="fas fa-caret-down"></i>
+								</a>
 								{!isAuthenticated() && (
-									<Link to="/signup" className="btn rounded btn-lg btn-outline-primary mr-5">
+									<Link to="/signup" className="btn btn-lg btn-primary btn-pill">
 										Get Started
 									</Link>
 								)}
-								<a href="#songsSection" className="btn rounded btn-lg btn-primary">
-									See Songs <i className="fas fa-caret-down"></i>
-								</a>
 							</div>
 						</div>
 					</div>

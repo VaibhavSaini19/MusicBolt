@@ -3,34 +3,36 @@ import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import "../styles.css";
 import Card from "../core/Card";
-import { getAllSongs } from "./helper/userApiCalls";
+import { getAllTracks } from "./helper/userApiCalls";
 import { isAuthenticated } from "../auth/helper";
 
 const UserDashboard = () => {
-	const [songs, setSongs] = useState([]);
+	const [tracks, setTracks] = useState([]);
 	const [error, setError] = useState(false);
 	const songTypes = ["popular", "latest", "upcoming", "onsale"];
+	const { user, token } = isAuthenticated();
 
-	// const loadAllSongs = () => {
-	// 	getAllSongs().then(data => {
-	// 		if (data.error) {
-	// 			setError(data.error);
-	// 		} else {
-	// 			setSongs(data);
-	// 			console.log("Songs list fetched");
-	// 		}
-	// 	});
-	// };
+	const loadAllTracks = () => {
+		getAllTracks(token).then(data => {
+			console.log(data);
+			if (data.error) {
+				setError(data.error);
+			} else {
+				setTracks(data);
+				console.log("Tracks list fetched");
+			}
+		});
+	};
 
-	// useEffect(() => {
-	// 	loadAllSongs();
-	// }, []);
+	useEffect(() => {
+		loadAllTracks();
+	}, []);
 
 	return (
 		<Base>
 			<section className="container mt-5" id="songsSection">
 				<h1 className="font-weight-bold">Songs</h1>
-				<div className="songs-area">
+				<div className="tracks-area">
 					<div className="button-group">
 						<button type="button" data-filter="*" className="active" id="btn1">
 							All
@@ -46,15 +48,15 @@ const UserDashboard = () => {
 						</button>
 					</div>
 					<div className="row grid mt-5">
-						{songs.map((song, index) => {
+						{tracks && tracks.map((track, index) => {
 							return (
 								<div
 									key={index}
-									className={`col-lg-4 col-md-6 col-sm-12 element-item song mb-4 ${
+									className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
 										songTypes[Math.floor(Math.random() * songTypes.length)]
 									}`}
 								>
-									<Card song={song} />
+									<Card track={track} />
 								</div>
 							);
 						})}

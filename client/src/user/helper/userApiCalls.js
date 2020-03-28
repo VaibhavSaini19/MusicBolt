@@ -1,9 +1,12 @@
 import React from 'react'
 import { API } from '../../backend'
 
-export const getAllSongs = (user, token) => {
-    return fetch(`${API}/songs/all`, {
+export const getAllTracks = (token) => {
+    return fetch(`${API}/track/11dFghVXANMlKmJXsNCbNl`, {
         method: "GET",
-        Authorization: `Bearer ${token}`
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        }
     })
 }

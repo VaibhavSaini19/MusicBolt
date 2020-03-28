@@ -8,7 +8,7 @@ const Base = ({
 		<div id="base">
 			<Navbar />
 			<div className="content">
-				<div>{children}</div>
+				{children}
 			</div>
 			<footer className="footer bg-light mt-5 pt-3">
 				<div className="container py-3">
