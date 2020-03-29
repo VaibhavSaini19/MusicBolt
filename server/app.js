@@ -52,19 +52,20 @@ const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
 access_token='';
 
-async function authSpotifyApi() {
-	let options = {
-		url: 'https://accounts.spotify.com/api/token',
-		form: {
-			grant_type: 'client_credentials'
-		},
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
-		}
-	}
-	request.post(options, (err, res, body) => {
-		// console.log(JSON.parse(body).access_token);
-		access_token = JSON.parse(body).access_token;
-	});
+function authSpotifyApi() {
+	access_token = 'BQBbw7YxTlwVGybLGCTS8ZEByxohDRGO1ChV3AaAM4MIr8GOE7Z9--Ga7FQfoIlktR4Nb7WVPrl6I-ogES4';
+	// let options = {
+	// 	url: 'https://accounts.spotify.com/api/token',
+	// 	form: {
+	// 		grant_type: 'client_credentials'
+	// 	},
+	// 	headers: {
+	// 		'Content-Type': 'application/x-www-form-urlencoded',
+	// 		'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+	// 	}
+	// }
+	// request.post(options, (err, res, body) => {
+	// 	console.log(JSON.parse(body).access_token);
+	// 	access_token = JSON.parse(body).access_token;
+	// });
 };

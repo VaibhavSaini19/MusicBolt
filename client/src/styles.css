@@ -64,7 +64,7 @@ section {
 	border-radius: 100px!important;
 }
 
-/* -----------------      Songs */
+/* -----------------      Tracks */
 .tracks-area {
 	padding: 4rem 0;
 }
@@ -85,12 +85,40 @@ section {
 	min-height: 100vh !important;
 }
 
-.track .card {
-	/* box-shadow: 0 0 12px rgba(0, 0, 0, 0.15); */
+.trackCard {
+	position: relative;
+	border: 1px solid #CFCFCF;
+	border-radius: 5px;
 	transition: 0.3s;
 }
-.track .card:hover {
+.trackCard .trackCard-img-container{
+	/* width: 15em; */
+}
+.trackCard .trackCard-img-container img{
+	width: 100%;
+}
+.trackCard .trackCard-body{
+	position: absolute;
+	padding: 1rem;
+	color: white;
+	bottom: 0;
+	z-index: 1;
+}
+.trackCard .trackCard-body .trackCard-name{
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+.trackCard::after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35) 25%, rgba(0, 0, 0, 0) 50%);
+}
+.trackCard:hover {
 	transform: translateY(-10px);
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 	transition: 0.3s;
 }

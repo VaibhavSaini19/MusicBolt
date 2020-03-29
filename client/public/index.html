@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
 		<meta name="description" content="Web site created using create-react-app" />
@@ -17,9 +16,34 @@
 		<script src="https://kit.fontawesome.com/728d1d3dec.js" crossorigin="anonymous"></script>
 
 		<!-- Isotope JS Library -->
-		<script defer src="./js/loadIsotope.js"></script>
 		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+		<script defer type="text/babel" src="./js/loadIsotope.js"></script>
+		<script>
+			const loadIsotope = () => {
+				setTimeout(() => {
+					let $btns = $(".tracks-area .button-group button");
+					$btns.click(e => {
+						$(".tracks-area .button-group button").removeClass("active");
+						e.target.classList.add("active");
 
+						let selector = $(e.target).attr("data-filter");
+						$(".tracks-area .grid").isotope({
+							filter: selector
+						});
+
+						return false;
+					});
+
+					$(".tracks-area .button-group #btn1").trigger("click");
+					console.log("Isotope filter loaded");
+				}, 1000);
+			};
+			$(document).ready(loadIsotope());
+			window.addEventListener("click", function() {
+				console.log('asd')
+				loadIsotope();
+			});
+		</script>
 		<title>MusicBolt</title>
 	</head>
 	<body>
