@@ -12,8 +12,9 @@ exports.getTrackById = (req, res, next, id) => {
 	})
 		.then(response => {
 			response.json().then(data => {
-				// console.log(data)
+				// console.log(data);
 				req.track = getCleanTrack(data);
+				// console.log(req.track);
 				next();
 			});
 		})
@@ -21,34 +22,26 @@ exports.getTrackById = (req, res, next, id) => {
 };
 
 exports.getTrack = (req, res) => {
-	console.log("Track: ", req.track);
+	// console.log("Track: ", req.track);
 	return res.json(req.track);
 };
 
-exports.getAllTracks = (req, res) => {
-	fetch(`	https://api.spotify.com/v1/tracks`)
-		.then(data => res.status(200).json(data))
-		.catch(err => res.status(500).json(err));
-};
-
-exports.updateUser = (req, res) => {
-	User.findByIdAndUpdate(
-		{ _id: req.profile._id },
-		{ $set: req.body },
-		{ new: true, useFindAndModify: false },
-		(err, user) => {
-			if (err) {
-				return res.status(400).json({
-					error: "You are not authorized for this action"
-				});
-			}
-			user.salt = undefined;
-			user.encry_password = undefined;
-			user.createdAt = undefined;
-			user.updatedAt = undefined;
-			res.json(user);
+exports.getNewReleasesTracks = (req, res) => {
+	fetch(`https://api.spotify.com/v1/browse/new-releases`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			'Content-Type': "application/json",
+			Authorization: `Bearer ${access_token}`
 		}
-	);
+	})
+		.then(response => {
+			response.json().then(data => {
+				// const tracks = data.albums.items.forEach((track => getCleanTrack(track.albums)))
+				res.status(200).json(data.albums.items.map(track => getCleanTrack(track)))
+			})
+		})
+		.catch(err => console.log(err));
 };
 
 
@@ -57,7 +50,8 @@ const getCleanTrack = (track) => {
 		artist: track.artists[0].name,
 		duration: Math.round(track.duration_ms/1000),
 		id: track.id,
-		name: track.name
+		name: track.name,
+		image: track.images[1].url
 	}
 	return cleanTrack;
 }
