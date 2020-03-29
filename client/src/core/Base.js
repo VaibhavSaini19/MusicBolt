@@ -1,13 +1,15 @@
 import React from "react";
 import Navbar from "./Navbar";
+import barba from 'barba.js';
+
 
 const Base = ({
 	children
 }) => {
 	return (
-		<div id="base">
+		<div id="base" data-barba="wrapper">
 			<Navbar />
-			<div className="content">
+			<div className="content" data-barba="container">
 				{children}
 			</div>
 			<footer className="footer bg-light mt-5 pt-3">

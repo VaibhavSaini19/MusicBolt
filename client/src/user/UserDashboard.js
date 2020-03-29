@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import "../styles.css";
 import Card from "../core/Card";
-import { getNewReleasesTracks } from "./helper/userApiCalls";
+import { getNewTracks, getFeaturedTracks } from "./helper/userApiCalls";
 import { isAuthenticated } from "../auth/helper";
 
 const UserDashboard = () => {
@@ -12,20 +12,31 @@ const UserDashboard = () => {
 	const trackTypes = ["popular", "latest", "upcoming", "onsale"];
 	const { user, token } = isAuthenticated();
 
-	const loadNewReleasesTracks = () => {
-		getNewReleasesTracks(token).then(data => {
+	const loadNewTracks = () => {
+		getNewTracks(token).then(data => {
+			if (data.error) {
+				setError(data.error);
+			} else {
+				setTracks([...tracks, ...data]);
+				console.log("New Tracks fetched");
+			}
+		});
+	};
+
+	const loadFeaturedTracks = () => {
+		getFeaturedTracks(token).then(data => {
 			if (data.error) {
 				setError(data.error);
 			} else {
 				// console.log(data);
-				setTracks(data);
-				console.log("Tracks list fetched");
+				setTracks([...tracks, ...data]);
+				console.log("Featured Tracks fetched");
 			}
 		});
 	};
 
 	useEffect(() => {
-		loadNewReleasesTracks();
+		loadNewTracks();
 	}, []);
 
 	return (
