@@ -1,26 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap");
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body{
-  font-family: 'Raleway', sans-serif;
-  line-height: 1.4;
+body {
+	font-family: "Raleway", sans-serif;
+	line-height: 1.4;
 }
 
 /* #CF6150: Red-white */
 /* #AD95CF: Purple-white */
 /* #F0C559: Yellow-white */
-.hero-gradient{
-  height: 100vh;
-  /* background-image: radial-gradient(#f64f59 0%, #c471ed 90%, #12c2e9 100%); */
-  background-image: radial-gradient(circle at 75% 75%, #7F7FD5, #86A8E7, #91eae4);
+.hero-gradient {
+	height: 100vh;
+	/* background-image: radial-gradient(#f64f59 0%, #c471ed 90%, #12c2e9 100%); */
+	background-image: radial-gradient(circle at 75% 75%, #7f7fd5, #86a8e7, #91eae4);
 }
-
-
 
 a:hover {
 	background: rgba(255, 255, 255, 0.15);
@@ -45,9 +43,6 @@ a:hover {
 	width: 100%;
 	margin: 0 auto;
 }
-.active {
-	color: #0f0 !important;
-}
 
 .adminActive {
 	background: #00f;
@@ -60,11 +55,11 @@ section {
 	min-height: 75vh;
 }
 
-.btn-pill{
-	border-radius: 100px!important;
+.btn-pill {
+	border-radius: 100px !important;
 }
 
-/* -----------------      Tracks */
+/* ---------------------------      Tracks      ------------------------------*/
 .tracks-area {
 	padding: 4rem 0;
 }
@@ -87,29 +82,29 @@ section {
 
 .trackCard {
 	position: relative;
-	border: 1px solid #CFCFCF;
+	border: 1px solid #cfcfcf;
 	border-radius: 5px;
 	transition: 0.3s;
 }
-.trackCard .trackCard-img-container{
+.trackCard .trackCard-img-container {
 	/* width: 15em; */
 }
-.trackCard .trackCard-img-container img{
+.trackCard .trackCard-img-container img {
 	width: 100%;
 }
-.trackCard .trackCard-body{
+.trackCard .trackCard-body {
 	position: absolute;
 	padding: 1rem;
 	color: white;
 	bottom: 0;
 	z-index: 1;
 }
-.trackCard .trackCard-body .trackCard-name{
+.trackCard .trackCard-body .trackCard-name {
 	font-weight: bold;
 	font-size: 1.5rem;
 }
-.trackCard::after{
-	content: '';
+.trackCard::after {
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -117,8 +112,79 @@ section {
 	height: 100%;
 	background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35) 25%, rgba(0, 0, 0, 0) 50%);
 }
+.trackCard::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0);
+	z-index: 2;
+}
 .trackCard:hover {
 	transform: translateY(-10px);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 	transition: 0.3s;
+}
+.trackCard:hover.trackCard::before{
+	background: rgba(0, 0, 0, 0.65);
+	transition: 0.3s;
+}
+.trackCard:hover .trackCard-rating{
+	display: block;
+	transition: 0.3s;
+}
+.trackCard .trackCard-rating {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	display: none;
+	font-size: 1.5rem;
+}
+
+a {
+	color: #9c3;
+	text-decoration: none;
+}
+
+.trackCard .trackCard-rating .starRating:not(old) {
+	display: inline-block;
+	width: 7.5em;
+	height: 1.5em;
+	overflow: hidden;
+	vertical-align: bottom;
+}
+
+.trackCard .trackCard-rating .starRating:not(old) > input {
+	margin-right: -100%;
+	opacity: 0;
+}
+
+.trackCard .trackCard-rating .starRating:not(old) > label {
+	display: block;
+	float: right;
+	cursor: pointer;
+	position: relative;
+	background: url("/imgs/star-off.svg");
+	background-size: contain;
+}
+
+.trackCard .trackCard-rating .starRating:not(old) > label:before {
+	content: "";
+	display: block;
+	width: 1.5em;
+	height: 1.5em;
+	background: url("/imgs/star-on.svg");
+	background-size: contain;
+	opacity: 0;
+	transition: opacity 0.2s linear;
+}
+
+.trackCard .trackCard-rating .starRating:not(old) > label:hover:before,
+.trackCard .trackCard-rating .starRating:not(old) > label:hover ~ label:before,
+.trackCard .trackCard-rating .starRating:not(:hover) > :checked ~ label:before {
+	opacity: 1;
 }
