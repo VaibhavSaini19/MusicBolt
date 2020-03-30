@@ -32,7 +32,11 @@ const userSchema = new mongoose.Schema({
     role: {
         type: Number,
         default: 0
-    }
+    },
+    favourites: [{
+        id: String,
+        rating: Number
+    }]
 }, {timestamps: true});
 
 userSchema.virtual("password")
