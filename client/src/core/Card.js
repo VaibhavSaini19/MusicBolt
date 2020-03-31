@@ -25,11 +25,20 @@ const Card = ({ track }) => {
 	const showRemoveBtn = () => {
 		return (
 			isFav && (
-				<button onClick={removeFromFavourites} className="btn btn-outline-danger">
+				<button onClick={handleRemove} className="btn btn-outline-danger">
 					Remove
 				</button>
 			)
 		);
+	};
+	
+	const handleRemove = () => {
+		getUserFavourites(user, token).then(user => {
+			removeFromFavourites(user, token, track.id).then(user => {
+				setRating(0);
+				setIsFav(false);
+			})
+		});
 	};
 
 	const handleSubmit = newRating => event => {

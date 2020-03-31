@@ -28,14 +28,18 @@ export const addToFavourites = (user, token, id, rating) => {
 };
 
 export const removeFromFavourites = (user, token, id) => {
-	// return fetch(`${API}/track/new`, {
-	// 	method: "GET",
-	// 	headers: {
-	// 		Accept: "application/json",
-	// 		"Content-Type": "application/json",
-	// 		Authorization: `Bearer ${token}`
-	// 	}
-	// })
-	// 	.then(data => data.json())
-	// 	.catch(err => console.log(err));
+	user.favourites = user.favourites.filter(track => track.id !== id);
+	const bodyData = { favourites: user.favourites };
+	
+	return fetch(`${API}/user/${user._id}`, {
+		method: "PUT",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`
+		},
+		body: JSON.stringify(bodyData)
+	})
+		.then(data => data.json())
+		.catch(err => console.log(err));
 };

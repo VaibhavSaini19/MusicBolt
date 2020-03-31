@@ -2,7 +2,7 @@ import React from "react";
 import { API } from "../../backend";
 
 export const getUserFavourites = (user, token) => {
-	return fetch(`${API}/track/all/${user._id}`, {
+	return fetch(`${API}/track/favourites/${user._id}`, {
 		method: "GET",
 		headers: {
 			Accept: "application/json",

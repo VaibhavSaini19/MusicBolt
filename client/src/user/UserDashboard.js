@@ -82,7 +82,7 @@ const UserDashboard = () => {
 						</div>
 					</div>
 					<div className="tab-pane fade" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
-
+						
 					</div>
 				</div>
 			</section>
