@@ -82,9 +82,9 @@ section {
 
 .trackCard {
 	position: relative;
-	border: 1px solid #cfcfcf;
-	border-radius: 5px;
+	border-radius: 6px;
 	transition: 0.3s;
+	overflow: hidden;
 }
 .trackCard .trackCard-img-container {
 	/* width: 15em; */
@@ -121,6 +121,7 @@ section {
 	height: 100%;
 	background: rgba(0, 0, 0, 0);
 	z-index: 2;
+	transition: 0.3s;
 }
 .trackCard:hover {
 	transform: translateY(-10px);
@@ -131,26 +132,38 @@ section {
 	background: rgba(0, 0, 0, 0.65);
 	transition: 0.3s;
 }
-.trackCard:hover .trackCard-rating{
+.trackCard .trackCard-favourite {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	display: none;
+}
+.trackCard:hover .trackCard-favourite{
 	display: block;
 	transition: 0.3s;
 }
-.trackCard .trackCard-rating {
+/* a {
+	color: #9c3;
+	text-decoration: none;
+} */
+
+.trackCard .trackCard-favourite .removeBtn{
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	cursor: pointer;
+}
+.trackCard .trackCard-favourite .starRating{
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 2;
-	display: none;
-	font-size: 1.5rem;
+	font-size: 1.4rem;
 }
-
-a {
-	color: #9c3;
-	text-decoration: none;
-}
-
-.trackCard .trackCard-rating .starRating:not(old) {
+.trackCard .trackCard-favourite .starRating:not(old) {
 	display: inline-block;
 	width: 7.5em;
 	height: 1.5em;
@@ -158,12 +171,12 @@ a {
 	vertical-align: bottom;
 }
 
-.trackCard .trackCard-rating .starRating:not(old) > input {
+.trackCard .trackCard-favourite .starRating:not(old) > input {
 	margin-right: -100%;
 	opacity: 0;
 }
 
-.trackCard .trackCard-rating .starRating:not(old) > label {
+.trackCard .trackCard-favourite .starRating:not(old) > label {
 	display: block;
 	float: right;
 	cursor: pointer;
@@ -172,7 +185,7 @@ a {
 	background-size: contain;
 }
 
-.trackCard .trackCard-rating .starRating:not(old) > label:before {
+.trackCard .trackCard-favourite .starRating:not(old) > label:before {
 	content: "";
 	display: block;
 	width: 1.5em;
@@ -183,8 +196,8 @@ a {
 	transition: opacity 0.2s linear;
 }
 
-.trackCard .trackCard-rating .starRating:not(old) > label:hover:before,
-.trackCard .trackCard-rating .starRating:not(old) > label:hover ~ label:before,
-.trackCard .trackCard-rating .starRating:not(:hover) > :checked ~ label:before {
+.trackCard .trackCard-favourite .starRating:not(old) > label:hover:before,
+.trackCard .trackCard-favourite .starRating:not(old) > label:hover ~ label:before,
+.trackCard .trackCard-favourite .starRating:not(:hover) > :checked ~ label:before {
 	opacity: 1;
 }
