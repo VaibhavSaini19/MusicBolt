@@ -1,5 +1,6 @@
-const Song = require("../models/track");
+const Track = require("../models/track");
 const fetch = require("node-fetch");
+const User = require("../models/user");
 
 exports.getTrackById = (req, res, next, id) => {
 	fetch(`https://api.spotify.com/v1/tracks/${id}`, {
@@ -60,6 +61,21 @@ exports.getFeaturedTracks = (req, res) => {
 			});
 		})
 		.catch(err => console.log(err));
+};
+
+exports.getUserFavourites = (req, res) => {
+	User.findById(req.profile._id).exec((err, user) => {
+		if (err || !user) {
+			return res.status(400).json({
+				error: "User not found in DB"
+			});
+		}
+		user.salt = undefined;
+		user.encry_password = undefined;
+		user.createdAt = undefined;
+		user.updatedAt = undefined;
+		res.status(200).json(user);
+	});
 };
 
 const getCleanTrack = track => {

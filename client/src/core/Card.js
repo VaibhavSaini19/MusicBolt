@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { isAuthenticated } from "../auth/helper";
 import { addToFavourites, removeFromFavourites } from "./helper/coreApiCalls";
-import { getUserTracks } from "../user/helper/userApiCalls";
+import { getUserFavourites } from "../user/helper/userApiCalls";
 
 const Card = ({ track }) => {
 	const [rating, setRating] = useState(0);
-	const [isFav, setIsFav] = useState(false)
+	const [isFav, setIsFav] = useState(false);
 
 	const { artist, duration, id, name, image } = track;
 	const { user, token } = isAuthenticated();
-	
+
 	const loadTrackRating = () => {
-		getUserTracks(user, token)
-		.then(user => {
-			if(user.favourites){
-				let track = user.favourites.filter(t => t.id == id );
-				if (track.length){
+		getUserFavourites(user, token).then(user => {
+			if (user.favourites) {
+				let track = user.favourites.filter(t => t.id == id);
+				if (track.length) {
 					setRating(track[0].rating);
 					setIsFav(true);
 				}
 			}
-		})
+		});
 	};
 
 	const showRemoveBtn = () => {
@@ -34,14 +33,12 @@ const Card = ({ track }) => {
 	};
 
 	const handleSubmit = newRating => event => {
-		getUserTracks(user, token)
-		.then(user => {
-			addToFavourites(user, token, track.id, newRating)
-			.then(user => {
+		getUserFavourites(user, token).then(user => {
+			addToFavourites(user, token, track.id, newRating).then(user => {
 				setRating(newRating);
 				setIsFav(true);
 			});
-		})
+		});
 	};
 
 	useEffect(() => {
