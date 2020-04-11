@@ -38,3 +38,16 @@ export const getFeaturedTracks = token => {
 		.then(data => data.json())
 		.catch(err => console.log(err));
 };
+
+export const getTrackById = (token, id) => {
+	return fetch(`${API}/track/${id}`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`
+		}
+	})
+		.then(data => data.json())
+		.catch(err => console.log(err));
+};

@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import "../styles.css";
 import Card from "../core/Card";
-import { getNewTracks, getFeaturedTracks } from "./helper/userApiCalls";
+import { getNewTracks, getFeaturedTracks, getUserFavourites, getTrackById } from "./helper/userApiCalls";
 import { isAuthenticated } from "../auth/helper";
 
 const UserDashboard = () => {
 	const [tracks, setTracks] = useState([]);
+	const [favourites, setFavourites] = useState([])
 	const [error, setError] = useState(false);
 	const trackTypes = ["popular", "latest", "upcoming", "onsale"];
 	const { user, token } = isAuthenticated();
@@ -35,8 +36,24 @@ const UserDashboard = () => {
 		});
 	};
 
+	const loadUserFavourites = async () => {
+		let favList = [];
+		let userData = await getUserFavourites(user, token);
+		if (userData.favourites) {
+			let l = userData.favourites.length;
+			userData.favourites.forEach(async (fav, ind) => {
+				let data = await getTrackById(token, fav.id);
+				favList.push(data);
+				if (ind == l-1){
+					setFavourites(favList);
+				}
+			})
+		}
+	}
+
 	useEffect(() => {
 		loadNewTracks();
+		loadUserFavourites();
 	}, []);
 
 	return (
@@ -66,23 +83,40 @@ const UserDashboard = () => {
 								</button>
 							</div>
 							<div className="row grid mt-5">
+								{/* {console.log(tracks)} */}
 								{tracks && tracks.map((track, index) => {
-									return (
-										<div
-											key={index}
-											className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
-												trackTypes[Math.floor(Math.random() * trackTypes.length)]
-											}`}
-										>
-											<Card track={track} />
-										</div>
-									);
+									// console.log(track.name, index);
+									if(favourites.findIndex(fav => fav.id == track.id) == -1){
+										return (
+											<div
+												key={index}
+												className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
+													trackTypes[Math.floor(Math.random() * trackTypes.length)]
+												}`}
+											>
+												<Card track={track}/>
+											</div>
+										);	
+									}
 								})}
 							</div>
 						</div>
 					</div>
 					<div className="tab-pane fade" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
-						
+						<div className="row grid mt-5">
+							{favourites && favourites.map((fav, index) => {
+								return (
+									<div
+										key={index}
+										className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
+											trackTypes[Math.floor(Math.random() * trackTypes.length)]
+										}`}
+									>
+										<Card track={fav}/>
+									</div>
+								);
+							})}
+						</div>
 					</div>
 				</div>
 			</section>

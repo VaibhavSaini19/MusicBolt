@@ -6,7 +6,7 @@ import { getUserFavourites } from "../user/helper/userApiCalls";
 const Card = ({ track }) => {
 	const [rating, setRating] = useState(0);
 	const [isFav, setIsFav] = useState(false);
-
+	
 	const { artist, duration, id, name, image } = track;
 	const { user, token } = isAuthenticated();
 
@@ -43,7 +43,7 @@ const Card = ({ track }) => {
 
 	const handleSubmit = newRating => event => {
 		getUserFavourites(user, token).then(user => {
-			addToFavourites(user, token, track.id, newRating).then(user => {
+			addToFavourites(user, token, track, newRating).then(user => {
 				setRating(newRating);
 				setIsFav(true);
 			});

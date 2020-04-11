@@ -1,18 +1,19 @@
 import React from "react";
 import { API } from "../../backend";
 
-export const addToFavourites = (user, token, id, rating) => {
-	let bodyData,
-		newTrack = { id, rating };
+export const addToFavourites = (user, token, track, rating) => {
+	let bodyData, newTrack = { ...track, rating};
 	if (user.favourites) {
-		let ind = user.favourites.findIndex(track => track.id == id);
+		let ind = user.favourites.findIndex(t => t.id == track.id);
 		if (ind !== -1) {
 			user.favourites[ind] = newTrack;
 			bodyData = { favourites: user.favourites };
 		} else {
-			bodyData = { favourites: [...user.favourites, { id, rating }] };
+			bodyData = { favourites: [...user.favourites, newTrack] };
 		}
-	} else bodyData = { favourites: [{ id, rating }] };
+	} else {
+		bodyData = { favourites: [newTrack] };
+	}
 	// console.log(bodyData);
 	return fetch(`${API}/user/${user._id}`, {
 		method: "PUT",
