@@ -53,7 +53,7 @@ const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
 access_token='';
 
 function authSpotifyApi() {
-	access_token = 'BQB-aF1LmTYMEu9Fd-bGdZmxXYIG9PH_Yig4oP-982Mcs7R8rvhPQ05hA15FDo33zfAHah75WdYDBm7849g';
+	access_token = 'BQD6mAXZHZI7cJGjsqErGucBPY83nHyfUg32Cn3H9I8u18TRglA9HJzcfU0FSnXr_ehzPl7iUWKz9JztkQA';
 	// let options = {
 	// 	url: 'https://accounts.spotify.com/api/token',
 	// 	form: {

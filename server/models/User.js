@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
         default: 0
     },
     favourites: [{
+        artist: String,
+        duration: Number,
         id: String,
+        name: String,
+        image: String,
         rating: Number
     }]
 }, {timestamps: true});

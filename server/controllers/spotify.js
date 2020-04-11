@@ -27,22 +27,34 @@ exports.getTrack = (req, res) => {
 	return res.json(req.track);
 };
 
-exports.getNewTracks = (req, res) => {
-	fetch(`https://api.spotify.com/v1/browse/new-releases`, {
+exports.getNewTracks = async (req, res) => {
+	let limit=20, artists = [], tracksList = [];
+	let responseArtist = await fetch(`https://api.spotify.com/v1/browse/new-releases?limit=${limit}`, {
 		method: "GET",
 		headers: {
 			Accept: "application/json",
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${access_token}`
 		}
+	});
+	responseArtist = await responseArtist.json();
+	responseArtist.albums.items.forEach(item => artists.push([item.artists[0].id, item.available_markets.includes("IN")?"IN":"US"]));
+	artists.forEach(async (artist, ind) => {
+		let responseTrack = await fetch(`https://api.spotify.com/v1/artists/${artist[0]}/top-tracks?country=${artist[1]}`, {
+			method: "GET",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${access_token}`
+			}
+		});
+		responseTrack = await responseTrack.json();
+		// responseTrack.tracks.forEach(track => tracksList.push(getCleanTrack(track)));
+		tracksList.push(getCleanTrack(responseTrack.tracks[0]));
+		if(ind == limit-1){
+			res.status(200).json(tracksList);
+		}
 	})
-		.then(response => {
-			response.json().then(data => {
-				const tracks = data.albums.items.map(track => getCleanTrack(track));
-				res.status(200).json(tracks);
-			});
-		})
-		.catch(err => console.log(err));
 };
 
 exports.getFeaturedTracks = (req, res) => {
@@ -79,12 +91,13 @@ exports.getUserFavourites = (req, res) => {
 };
 
 const getCleanTrack = track => {
+	// console.log(track);
 	const cleanTrack = {
 		artist: track.artists[0].name,
 		duration: Math.round(track.duration_ms / 1000),
 		id: track.id,
 		name: track.name,
-		image: track.images[1].url
+		image: track.album.images[1].url
 	};
 	return cleanTrack;
 };
