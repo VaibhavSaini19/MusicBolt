@@ -39,7 +39,7 @@ const Signin = () => {
 	const performRedirect = () => {
 		if (didRedirect) {
 			if (user && user.role === 1) {
-				return <Redirect to="/admin/dashboard"/>
+				return <Redirect to="/user/dashboard"/>
 			} else {
 				return <Redirect to="/user/dashboard"/>				
 			}

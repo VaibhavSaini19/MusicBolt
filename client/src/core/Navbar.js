@@ -9,17 +9,18 @@ const navbar = ({ history }) => {
 			<NavLink to="/" className="navbar-brand ml-1 px-4" style={{cursor: 'pointer'}}>
 				<div className="row h-100 align-items-center">
 					<div className="imgContainer" style={{width: '2rem'}}>
-						<img src="../imgs/logo.png" alt="logo"/>
+						<img src="../imgs/logo.svg" alt="logo"/>
 					</div>
-					<span>&nbsp;MusicBolt</span>
+					<span>&emsp;MusicBolt</span>
 				</div>
 			</NavLink>
-			<form className="form-inline">
-				<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-				<button className="btn btn-outline-primary my-2 my-sm-0" type="submit">Go</button>
-			</form>
+			{isAuthenticated() && (
+				<div className="">
+					Welcome {isAuthenticated().user.name}
+				</div>
+			)}
 			<ul className="nav">
-				{isAuthenticated() && isAuthenticated().user.role === 0 && (
+				{isAuthenticated() && isAuthenticated() && (
 					<li className="nav-item mx-2">
 						<NavLink
 							activeClass="activeNavLink" exact
@@ -30,7 +31,7 @@ const navbar = ({ history }) => {
 						</NavLink>
 					</li>
 				)}
-				{isAuthenticated() && isAuthenticated().user.role === 0 && (
+				{isAuthenticated() && isAuthenticated() && (
 					<li className="nav-item mx-2">
 						<NavLink
 							activeClass="activeNavLink" exact

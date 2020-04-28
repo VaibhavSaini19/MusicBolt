@@ -32,27 +32,40 @@ const UserDashboard = () => {
 			userData.favourites.forEach(async (fav, ind) => {
 				let data = await getTrackById(token, fav.id);
 				favList.push(data);
-				if (ind == l-1){
+				if (ind == l - 1) {
 					setFavourites(favList);
 				}
-			})
+			});
 		}
-	}
+	};
 
 	const loadRecommendations = () => {
 		getRecommendationTracks(token, user).then(data => {
 			if (data.error) {
 				setError(data.error);
 			} else {
-				setTracks([...recommendations, ...recommendations]);
-				console.log("Recommendation Tracks fetched");
+				// console.log(data);
+				let recs = [];
+				let len = data.length;
+				data.forEach((trackId, ind) => {
+					getTrackById(token, trackId)
+						.then(track => {
+							recs.push(track)
+							if (ind == len-1){
+								setRecommendations([...recommendations, ...recs]);
+								console.log("Recommendation Tracks fetched");
+							}
+						})
+						.catch(err => console.log(err));
+				});
 			}
-		})
-	}
+		});
+	};
 
 	useEffect(() => {
 		loadNewTracks();
 		loadUserFavourites();
+		loadRecommendations();
 	}, []);
 
 	return (
@@ -60,13 +73,43 @@ const UserDashboard = () => {
 			<section className="container mt-5" id="songsSection">
 				<nav>
 					<div className="nav nav-fill nav-lg nav-tabs" id="nav-tab" role="tablist">
-						<a className="nav-item nav-link active" id="nav-tracks-tab" data-toggle="tab" href="#nav-tracks" role="tab" aria-controls="nav-tracks" aria-selected="true"><h3>Tracks</h3></a>
-						<a className="nav-item nav-link" id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false"><h3>Favourites</h3></a>
-						<a className="nav-item nav-link" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-fav" aria-selected="false"><h3>Recommendations</h3></a>
+						<a 
+							className="nav-item nav-link active"
+							id="nav-tracks-tab"
+							data-toggle="tab"
+							href="#nav-tracks"
+							role="tab"
+							aria-controls="nav-tracks"
+							aria-selected="true"
+						>
+							<h3>Tracks</h3>
+						</a>
+						<a
+							className="nav-item nav-link"
+							id="nav-fav-tab"
+							data-toggle="tab"
+							href="#nav-fav"
+							role="tab"
+							aria-controls="nav-fav"
+							aria-selected="false"
+						>
+							<h3>Favourites</h3>
+						</a>
+						<a
+							className="nav-item nav-link"
+							id="nav-rec-tab"
+							data-toggle="tab"
+							href="#nav-rec"
+							role="tab"
+							aria-controls="nav-fav"
+							aria-selected="false"
+						>
+							<h3>Recommendations</h3>
+						</a>
 					</div>
 				</nav>
 				<div className="tab-content" id="nav-tabContent">
-					<div className="tab-pane fade show active" id="nav-tracks" role="tabpanel" aria-labelledby="nav-home-tab">
+					<div className="tab-pane fade show active" id="nav-tracks" role="tabpanel" aria-labelledby="nav-home-tab" >
 						<div className="tracks-area">
 							<div className="button-group">
 								<button type="button" data-filter="*" className="active" id="btn1">
@@ -84,43 +127,53 @@ const UserDashboard = () => {
 							</div>
 							<div className="row grid mt-5">
 								{/* {console.log(tracks)} */}
-								{tracks && tracks.map((track, index) => {
-									// console.log(track.name, index);
-									if(favourites.findIndex(fav => fav.id == track.id) == -1){
-										return (
-											<div
-												key={index}
-												className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
-													trackTypes[Math.floor(Math.random() * trackTypes.length)]
-												}`}
-											>
-												<Card track={track}/>
-											</div>
-										);	
-									}
-								})}
+								{tracks &&
+									tracks.map((track, index) => {
+										// console.log(track.name, index);
+										if (favourites.findIndex(fav => fav.id == track.id) == -1) {
+											return (
+												<div
+													key={index}
+													className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
+														trackTypes[Math.floor(Math.random() * trackTypes.length)]
+													}`}
+												>
+													<Card track={track} />
+												</div>
+											);
+										}
+									})}
 							</div>
 						</div>
 					</div>
 					<div className="tab-pane fade" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
 						<div className="row grid mt-5">
-							{favourites && favourites.map((fav, index) => {
-								return (
-									<div
-										key={index}
-										className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4 ${
-											trackTypes[Math.floor(Math.random() * trackTypes.length)]
-										}`}
-									>
-										<Card track={fav}/>
-									</div>
-								);
-							})}
+							{favourites &&
+								favourites.map((fav, index) => {
+									return (
+										<div
+											key={index}
+											className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4`}
+										>
+											<Card track={fav} />
+										</div>
+									);
+								})}
 						</div>
 					</div>
 					<div className="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
 						<div className="row grid mt-5">
-							<button onClick={loadRecommendations}>Go</button>
+						{recommendations &&
+								recommendations.map((rec, index) => {
+									return (
+										<div
+											key={index}
+											className={`col-lg-4 col-md-6 col-sm-12 element-item track mb-4`}
+										>
+											<Card track={rec} />
+										</div>
+									);
+								})}
 						</div>
 					</div>
 				</div>
