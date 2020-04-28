@@ -40,3 +40,19 @@ exports.updateUser = (req, res) => {
 		}
 	);
 };
+
+exports.getRecommendations = (req, res) => {
+	// User.find({_id : {$ne: req.profile._id}}, {favourites: 1}, (err, arr) => {
+	User.find({}, {favourites: 1}, (err, arr) => {
+		console.log(arr);
+		data = {}
+		arr.forEach(user => {
+			obj = new Object();
+			user.favourites.forEach(fav => {
+				obj[fav._id] = fav.rating;
+			});
+			data[user._id] = obj;
+		});
+		console.log(data);
+	})
+}

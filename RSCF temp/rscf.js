@@ -49,7 +49,11 @@ var dataset = {
 		"You, Me and Dupree": 3.5
 	},
 
-	Toby: { "Snakes on a Plane": 4.5, "You, Me and Dupree": 1.0, "Superman Returns": 4.0 }
+	"Toby": { 
+		"Snakes on a Plane": 4.5, 
+		"You, Me and Dupree": 1.0, 
+		"Superman Returns": 4.0 
+	}
 };
 
 var euclidean_score = function(dataset, p1, p2) {
@@ -89,7 +93,7 @@ var len = function(obj) {
 	return len;
 };
 
-euclidean_score(dataset, "Lisa Rose", "Jack Mathews");
+euclidean_score(dataset, "Lisa Rose", "Jack Matthews");
 
 var pearson_correlation = function(dataset, p1, p2) {
 	var existp1p2 = {};

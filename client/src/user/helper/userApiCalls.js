@@ -51,3 +51,16 @@ export const getTrackById = (token, id) => {
 		.then(data => data.json())
 		.catch(err => console.log(err));
 };
+
+export const getRecommendationTracks = (token, user) => {
+	return fetch(`${API}/user/${user._id}/recommendations`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`
+		}
+	})
+		.then(data => data.json())
+		.catch(err => console.log(err));
+};

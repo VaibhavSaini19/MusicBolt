@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
-import "../styles.css";
 import Card from "../core/Card";
-import { getNewTracks, getFeaturedTracks, getUserFavourites, getTrackById } from "./helper/userApiCalls";
+import { getNewTracks, getRecommendationTracks, getUserFavourites, getTrackById } from "./helper/userApiCalls";
 import { isAuthenticated } from "../auth/helper";
 
 const UserDashboard = () => {
 	const [tracks, setTracks] = useState([]);
-	const [favourites, setFavourites] = useState([])
+	const [favourites, setFavourites] = useState([]);
+	const [recommendations, setRecommendations] = useState([]);
 	const [error, setError] = useState(false);
 	const trackTypes = ["popular", "latest", "upcoming", "onsale"];
 	const { user, token } = isAuthenticated();
@@ -20,18 +20,6 @@ const UserDashboard = () => {
 			} else {
 				setTracks([...tracks, ...data]);
 				console.log("New Tracks fetched");
-			}
-		});
-	};
-
-	const loadFeaturedTracks = () => {
-		getFeaturedTracks(token).then(data => {
-			if (data.error) {
-				setError(data.error);
-			} else {
-				// console.log(data);
-				setTracks([...tracks, ...data]);
-				console.log("Featured Tracks fetched");
 			}
 		});
 	};
@@ -51,6 +39,17 @@ const UserDashboard = () => {
 		}
 	}
 
+	const loadRecommendations = () => {
+		getRecommendationTracks(token, user).then(data => {
+			if (data.error) {
+				setError(data.error);
+			} else {
+				setTracks([...recommendations, ...recommendations]);
+				console.log("Recommendation Tracks fetched");
+			}
+		})
+	}
+
 	useEffect(() => {
 		loadNewTracks();
 		loadUserFavourites();
@@ -63,6 +62,7 @@ const UserDashboard = () => {
 					<div className="nav nav-fill nav-lg nav-tabs" id="nav-tab" role="tablist">
 						<a className="nav-item nav-link active" id="nav-tracks-tab" data-toggle="tab" href="#nav-tracks" role="tab" aria-controls="nav-tracks" aria-selected="true"><h3>Tracks</h3></a>
 						<a className="nav-item nav-link" id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="false"><h3>Favourites</h3></a>
+						<a className="nav-item nav-link" id="nav-rec-tab" data-toggle="tab" href="#nav-rec" role="tab" aria-controls="nav-fav" aria-selected="false"><h3>Recommendations</h3></a>
 					</div>
 				</nav>
 				<div className="tab-content" id="nav-tabContent">
@@ -116,6 +116,11 @@ const UserDashboard = () => {
 									</div>
 								);
 							})}
+						</div>
+					</div>
+					<div className="tab-pane fade" id="nav-rec" role="tabpanel" aria-labelledby="nav-rec-tab">
+						<div className="row grid mt-5">
+							<button onClick={loadRecommendations}>Go</button>
 						</div>
 					</div>
 				</div>

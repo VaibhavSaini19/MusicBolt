@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Landing from "./core/Landing";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
+import "./styles.css";
 import AdminRoute from "./auth/helper/AdminRoute";
 import PrivateRoute from "./auth/helper/PrivateRoute";
 import UserDashboard from "./user/UserDashboard";
