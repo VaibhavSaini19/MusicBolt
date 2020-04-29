@@ -64,3 +64,16 @@ export const getRecommendationTracks = (token, user) => {
 		.then(data => data.json())
 		.catch(err => console.log(err));
 };
+
+export const getAllUsersFavs = (token, user) => {
+	return fetch(`${API}/user/${user._id}/all`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`
+		}
+	})
+		.then(data => data.json())
+		.catch(err => console.log(err));
+};

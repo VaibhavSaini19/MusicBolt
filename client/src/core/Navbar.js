@@ -5,7 +5,7 @@ import { signout, isAuthenticated } from "../auth/helper";
 
 const navbar = ({ history }) => {
 	return (
-		<nav className="navbar shadow navbar-light bg-light sticky-top justify-content-between py-2">
+		<nav className="navbar shadow navbar-light bg-light sticky-top justify-content-between py-2 topNav">
 			<NavLink to="/" className="navbar-brand ml-1 px-4" style={{cursor: 'pointer'}}>
 				<div className="row h-100 align-items-center">
 					<div className="imgContainer" style={{width: '2rem'}}>
@@ -23,7 +23,7 @@ const navbar = ({ history }) => {
 				{isAuthenticated() && isAuthenticated() && (
 					<li className="nav-item mx-2">
 						<NavLink
-							activeClass="activeNavLink" exact
+							exact
 							className="nav-link font-weight-bold"
 							to="/"
 						>
@@ -34,7 +34,7 @@ const navbar = ({ history }) => {
 				{isAuthenticated() && isAuthenticated() && (
 					<li className="nav-item mx-2">
 						<NavLink
-							activeClass="activeNavLink" exact
+							exact
 							className="nav-link font-weight-bold"
 							to="/user/dashboard"
 						>
@@ -45,7 +45,7 @@ const navbar = ({ history }) => {
 				{isAuthenticated() && isAuthenticated().user.role === 1 && (
 					<li className="nav-item mx-2">
 						<NavLink
-							activeClass="activeNavLink" exact
+							exact
 							className="nav-link font-weight-bold"
 							to="/admin/dashboard"
 						>
@@ -56,12 +56,12 @@ const navbar = ({ history }) => {
 				{!isAuthenticated() && (
 					<Fragment>
 						<li className="nav-item mx-2">
-							<NavLink activeClass="activeNavLink" exact className="nav-link font-weight-bold" to="/signup">
+							<NavLink className="nav-link font-weight-bold" to="/signup">
 								Sign Up
 							</NavLink>
 						</li>
 						<li className="nav-item mx-2">
-							<NavLink activeClass="activeNavLink" exact className="nav-link font-weight-bold btn btn-primary rounded" to="/signin">
+							<NavLink className="nav-link font-weight-bold btn btn-primary rounded" to="/signin">
 								Sign In
 							</NavLink>
 						</li>
@@ -70,7 +70,7 @@ const navbar = ({ history }) => {
 				{isAuthenticated() && (
 					<li className="nav-item mx-2">
 						<span
-							className="nav-link font-weight-bold btn btn-danger rounded"
+							className="nav-link font-weight-bold btn btn-outline-danger rounded"
 							onClick={() => {
 								signout(() => {
 									history.push("/");

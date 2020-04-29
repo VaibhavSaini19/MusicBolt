@@ -7,6 +7,7 @@ import "./styles.css";
 import AdminRoute from "./auth/helper/AdminRoute";
 import PrivateRoute from "./auth/helper/PrivateRoute";
 import UserDashboard from "./user/UserDashboard";
+import AdminDashboard from "./user/AdminDashboard";
 
 const App = () => {
 	return (
@@ -16,7 +17,7 @@ const App = () => {
 				<Route path="/signup" exact component={Signup} />
 				<Route path="/signin" exact component={Signin} />
 				<PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
-				{/* <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard} /> */}
+				<AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
 			</Switch>
 		</BrowserRouter>
 	);

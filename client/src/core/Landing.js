@@ -7,9 +7,12 @@ const Landing = () => {
 	return (
 		<Base>
 			<section className="" style={{ background: "#FFFFFF" }}>
+				<div class="svgs">
+					<img src="./imgs/static_bg.svg" alt=""/>
+				</div>
 				<div className="page" id="part1">
 					<div className="imgContainer">
-						<img src="./imgs/main_bg.png" alt="asd" />
+						<img src="./imgs/main_bg_trans.png" alt="asd" />
 					</div>
 					<div className="info">
 						<div className="title text-primary">Music Recommender System</div>
@@ -59,33 +62,6 @@ const Landing = () => {
 					</div>
 					<div className="scrollIndicator"></div>
 				</div>
-				{/* <div className="row">
-					<div className="col-6 text-center">
-						<div className="imgContainer" style={{ width: "45em" }}>
-							<img src="./imgs/main_bg.png" alt="Main bg" />
-						</div>
-					</div>
-					<div className="col-5">
-						<div className="row h-100 align-items-center">
-							<div className="row mx-0">
-								<div className="display-4 font-weight-bold mb-5">
-									Music Recommender System
-								</div>
-								<h3 className="text-muted">Using Collaborative Filtering &amp; Spotify API</h3>
-							</div>
-							<div className="row mx-0">
-								<a href="#howItWorksSection" className="btn btn-lg btn-outline-primary mr-5 btn-pill">
-									How it works <i className="fas fa-caret-down"></i>
-								</a>
-								{!isAuthenticated() && (
-									<Link to="/signup" className="btn btn-lg btn-primary btn-pill">
-										Get Started
-									</Link>
-								)}
-							</div>
-						</div>
-					</div>
-				</div> */}
 			</section>
 		</Base>
 	);

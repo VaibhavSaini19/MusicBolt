@@ -19,6 +19,8 @@ body {
 /*				LANDING PAGE			*/
 .svgs {
 	position: fixed;
+	width: 100vw;
+	height: 100vh;
 }
 .page {
 	width: 100%;
@@ -180,8 +182,8 @@ a:hover {
 	flex-grow: 1;
 }
 
-.activeNavLink{
-	background: rgb(202, 202, 202);
+.topNav .active.nav-link{
+	background: rgba(114, 187, 255, 0.226);
 }
 .imgContainer {
 	margin: 0 auto;

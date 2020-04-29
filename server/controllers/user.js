@@ -41,8 +41,13 @@ exports.updateUser = (req, res) => {
 	);
 };
 
+exports.getAllUsers = (req, res) => {
+	User.find({}, {name: 1, favourites: 1}, (err, arr) => {
+		res.json(arr);
+	})
+}
+
 exports.getRecommendations = (req, res) => {
-	// User.find({_id : {$ne: req.profile._id}}, {favourites: 1}, (err, arr) => {
 	User.find({}, {favourites: 1}, (err, arr) => {
 		data = {}
 		arr.forEach(user => {
@@ -53,7 +58,7 @@ exports.getRecommendations = (req, res) => {
 			data[user._id] = obj;
 		});
 		// console.log(data);
-		rec = recommendation_eng(data, '5e82c412672a8f341cc98717', pearson_correlation);
+		rec = recommendation_eng(data, req.profile._id, pearson_correlation);
 		// console.log(rec);
 		res.json(rec[1]);
 	})
