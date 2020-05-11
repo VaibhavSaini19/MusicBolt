@@ -1,7 +1,7 @@
 import React from "react";
 import { API } from "../../backend";
 
-export const getUserFavourites = (user, token) => {
+export const getUserFavourites = (token, user) => {
 	return fetch(`${API}/track/favourites/${user._id}`, {
 		method: "GET",
 		headers: {
@@ -67,6 +67,23 @@ export const getRecommendationTracks = (token, user) => {
 
 export const getAllUsersFavs = (token, user) => {
 	return fetch(`${API}/user/${user._id}/all`, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`
+		}
+	})
+		.then(data => data.json())
+		.catch(err => console.log(err));
+};
+
+export const getSearchQueryResults = (token, user, searchQuery) => {
+	let url = new URL(`${API}/track/${user._id}/search`)
+	let params = {q: searchQuery}
+	url.search = new URLSearchParams(params).toString();
+
+	return fetch(url, {
 		method: "GET",
 		headers: {
 			Accept: "application/json",

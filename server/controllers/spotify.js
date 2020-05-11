@@ -90,14 +90,49 @@ exports.getUserFavourites = (req, res) => {
 	});
 };
 
+exports.getSearchQueryResults = (req, res) => {
+	let url = new URL(`https://api.spotify.com/v1/search`)
+	let params = {q: req.query.q, type: 'track'};
+	url.search = new URLSearchParams(params).toString();
+	// console.log(url)
+	fetch(url, {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${access_token}`
+		}
+	})
+		.then(response => {
+			response.json().then(data => {
+				if (data && data.tracks){
+					let l = data.tracks.items.length;
+					let results = [];
+					data.tracks.items.forEach((item, index) => {
+						results.push(item.id);
+						if(index == l-1)
+							res.status(200).json(results);
+					});
+				}else{
+					return res.status(500).json({error: 'Server error'});
+				}
+			});
+		})
+		.catch(err => console.log(err));
+};
+
 const getCleanTrack = track => {
 	// console.log(track);
-	const cleanTrack = {
-		artist: track.artists[0].name,
-		duration: Math.round(track.duration_ms / 1000),
-		id: track.id,
-		name: track.name,
-		image: track.album.images[1].url
-	};
-	return cleanTrack;
+	try{
+		const cleanTrack = {
+			artist: track.artists[0].name,
+			duration: Math.round(track.duration_ms / 1000),
+			id: track.id,
+			name: track.name,
+			image: track.album.images[1].url
+		};
+		return cleanTrack;
+	} catch (e){
+		return;
+	}
 };

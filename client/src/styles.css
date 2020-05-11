@@ -231,16 +231,19 @@ section {
 
 .trackCard {
 	position: relative;
-	min-height: 20em;
+	/* min-height: 20em; */
 	border-radius: 6px;
 	transition: 0.3s;
 	overflow: hidden;
 }
 .trackCard .trackCard-img-container {
-	/* width: 15em; */
+	/* position: absolute;
+	height: 100%;
+	width: 100%; */
 }
 .trackCard .trackCard-img-container img {
 	width: 100%;
+	/* height: 100%; */
 }
 .trackCard .trackCard-body {
 	position: absolute;

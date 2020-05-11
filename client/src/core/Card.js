@@ -11,7 +11,7 @@ const Card = ({ track }) => {
 	const { user, token } = isAuthenticated();
 
 	const loadTrackRating = () => {
-		getUserFavourites(user, token).then(user => {
+		getUserFavourites(token, user).then(user => {
 			if (user.favourites) {
 				let track = user.favourites.filter(t => t.id == id);
 				if (track.length) {
@@ -33,7 +33,7 @@ const Card = ({ track }) => {
 	};
 	
 	const handleRemove = () => {
-		getUserFavourites(user, token).then(user => {
+		getUserFavourites(token, user).then(user => {
 			removeFromFavourites(user, token, track.id).then(user => {
 				setRating(0);
 				setIsFav(false);
@@ -42,7 +42,7 @@ const Card = ({ track }) => {
 	};
 
 	const handleSubmit = newRating => event => {
-		getUserFavourites(user, token).then(user => {
+		getUserFavourites(token, user).then(user => {
 			addToFavourites(user, token, track, newRating).then(user => {
 				setRating(newRating);
 				setIsFav(true);

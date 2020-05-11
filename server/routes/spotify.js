@@ -4,6 +4,7 @@ const router = express.Router();
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const {
 	getUserFavourites,
+	getSearchQueryResults,
 	getTrackById,
 	getTrack,
 	getNewTracks,
@@ -15,7 +16,8 @@ const { getUserById } = require("../controllers/user");
 router.param("trackId", getTrackById);
 router.param("userId", getUserById);
 
-router.get("/track/favourites/:userId", isSignedIn, getUserFavourites);
+router.get("/track/favourites/:userId", isSignedIn, isAuthenticated, getUserFavourites);
+router.get("/track/:userId/search", isSignedIn, isAuthenticated, getSearchQueryResults);
 router.get("/track/new", isSignedIn, getNewTracks);
 router.get("/track/featured", isSignedIn, getFeaturedTracks);
 router.get("/track/:trackId", isSignedIn, getTrack);
