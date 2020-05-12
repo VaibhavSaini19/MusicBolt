@@ -57,9 +57,9 @@ exports.getRecommendations = (req, res) => {
 			});
 			data[user._id] = obj;
 		});
-		// console.log(data);
+		console.log(data);
 		rec = recommendation_eng(data, req.profile._id, pearson_correlation);
-		// console.log(rec);
+		console.log(rec);
 		res.json(rec[1]);
 	})
 }

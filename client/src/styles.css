@@ -163,12 +163,15 @@ body {
 	opacity: 0.75;
 }
 
-/* 				COMMON CLASSES				*/
+/*----------------------COMMON CLASSES----------------------*/
 
 a:hover {
 	background: rgba(255, 255, 255, 0.15);
 }
 
+footer, nav.navbar *{
+	font-family: "Raleway", sans-serif;
+}
 #root {
 	min-height: 100vh;
 }
@@ -353,4 +356,20 @@ section {
 .trackCard .trackCard-favourite .starRating:not(old) > label:hover ~ label:before,
 .trackCard .trackCard-favourite .starRating:not(:hover) > :checked ~ label:before {
 	opacity: 1;
+}
+
+
+/*---------------------	Footer ---------------------*/
+#contactus{
+	position: relative;
+}
+#contactus span::after{
+	content: '';
+	position: absolute;
+	right: 0;
+	bottom: -4px;
+	width: 85%;
+	height: 3px;
+	border-radius: 10px;
+	background: white;
 }

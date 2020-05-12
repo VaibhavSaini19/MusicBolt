@@ -35,8 +35,10 @@ const UserDashboard = () => {
 			let l = userData.favourites.length;
 			userData.favourites.forEach(async (fav, ind) => {
 				let data = await getTrackById(token, fav.id);
-				favList.push(data);
+				if (data)
+					favList.push(data);
 				if (ind == l - 1) {
+					// console.log(favList);
 					setFavourites(favList);
 				}
 			});
@@ -48,13 +50,14 @@ const UserDashboard = () => {
 			if (data.error) {
 				setError(data.error);
 			} else {
-				// console.log(data);
+				console.log(data);
 				let recs = [];
 				let len = data.length;
 				data.forEach((trackId, ind) => {
 					getTrackById(token, trackId)
 						.then(track => {
-							recs.push(track);
+							if(track)
+								recs.push(track);
 							if (ind == len - 1) {
 								setRecommendations([...recommendations, ...recs]);
 								console.log("Recommendation Tracks fetched");
@@ -119,7 +122,7 @@ const UserDashboard = () => {
 		<Base>
 			<section className="container mt-5" id="songsSection">
 				<div className="form-group">
-					<label htmlFor="seach">Search something</label>
+					<label htmlFor="seach"><h4><i className="fas fa-search text-muted">&nbsp;</i>Search something</h4></label>
 					<input
 						type="text"
 						onChange={e => execSearchQuery(e.target.value)}

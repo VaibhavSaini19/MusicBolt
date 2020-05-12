@@ -1,60 +1,79 @@
 // https://becominghuman.ai/introduction-to-recommendation-system-in-javascript-74209c7ff2f7
 
-var dataset = {
-	"Lisa Rose": {
-		"Lady in the Water": 2.5,
-		"Snakes on a Plane": 3.5,
-		"Just My Luck": 3.0,
-		"Superman Returns": 3.5,
-		"You, Me and Dupree": 2.5,
-		"The Night Listener": 3.0
-	},
-	"Gene Seymour": {
-		"Lady in the Water": 3.0,
-		"Snakes on a Plane": 3.5,
-		"Just My Luck": 1.5,
-		"Superman Returns": 5.0,
-		"The Night Listener": 3.0,
-		"You, Me and Dupree": 3.5
-	},
+// var dataset = {
+// 	"Lisa Rose": {
+// 		"Lady in the Water": 2.5,
+// 		"Snakes on a Plane": 3.5,
+// 		"Just My Luck": 3.0,
+// 		"Superman Returns": 3.5,
+// 		"You, Me and Dupree": 2.5,
+// 		"The Night Listener": 3.0
+// 	},
+// 	"Gene Seymour": {
+// 		"Lady in the Water": 3.0,
+// 		"Snakes on a Plane": 3.5,
+// 		"Just My Luck": 1.5,
+// 		"Superman Returns": 5.0,
+// 		"The Night Listener": 3.0,
+// 		"You, Me and Dupree": 3.5
+// 	},
 
-	"Michael Phillips": {
-		"Lady in the Water": 2.5,
-		"Snakes on a Plane": 3.0,
-		"Superman Returns": 3.5,
-		"The Night Listener": 4.0
-	},
-	"Claudia Puig": {
-		"Snakes on a Plane": 3.5,
-		"Just My Luck": 3.0,
-		"The Night Listener": 4.5,
-		"Superman Returns": 4.0,
-		"You, Me and Dupree": 2.5
-	},
+// 	"Michael Phillips": {
+// 		"Lady in the Water": 2.5,
+// 		"Snakes on a Plane": 3.0,
+// 		"Superman Returns": 3.5,
+// 		"The Night Listener": 4.0
+// 	},
+// 	"Claudia Puig": {
+// 		"Snakes on a Plane": 3.5,
+// 		"Just My Luck": 3.0,
+// 		"The Night Listener": 4.5,
+// 		"Superman Returns": 4.0,
+// 		"You, Me and Dupree": 2.5
+// 	},
 
-	"Mick LaSalle": {
-		"Lady in the Water": 3.0,
-		"Snakes on a Plane": 4.0,
-		"Just My Luck": 2.0,
-		"Superman Returns": 3.0,
-		"The Night Listener": 3.0,
-		"You, Me and Dupree": 2.0
-	},
+// 	"Mick LaSalle": {
+// 		"Lady in the Water": 3.0,
+// 		"Snakes on a Plane": 4.0,
+// 		"Just My Luck": 2.0,
+// 		"Superman Returns": 3.0,
+// 		"The Night Listener": 3.0,
+// 		"You, Me and Dupree": 2.0
+// 	},
 
-	"Jack Matthews": {
-		"Lady in the Water": 3.0,
-		"Snakes on a Plane": 4.0,
-		"The Night Listener": 3.0,
-		"Superman Returns": 5.0,
-		"You, Me and Dupree": 3.5
-	},
+// 	"Jack Matthews": {
+// 		"Lady in the Water": 3.0,
+// 		"Snakes on a Plane": 4.0,
+// 		"The Night Listener": 3.0,
+// 		"Superman Returns": 5.0,
+// 		"You, Me and Dupree": 3.5
+// 	},
 
-	"Toby": { 
-		"Snakes on a Plane": 4.5, 
-		"You, Me and Dupree": 1.0, 
-		"Superman Returns": 4.0 
+// 	"Toby": { 
+// 		"Snakes on a Plane": 4.5, 
+// 		"You, Me and Dupree": 1.0, 
+// 		"Superman Returns": 4.0 
+// 	}
+// };
+
+dataset = { 
+	'5eb8d67376d6b10358d66211':{ 
+		'1mpD5ioZ9479I6CuKxn3K9': 5,
+		'0lSZh5W0wDeurkGzLYY6hf': 3,
+		'7gHs73wELdeycvS48JfIos': 5,
+		'2w2lfwoTELQyN940qM7Nfd': 5 
+	},
+  	'5eb8d6b376d6b10358d66212': { 
+		'0lSZh5W0wDeurkGzLYY6hf': 5,
+     	'6XHVuErjQ4XNm6nDPVCxVX': 4,
+     	'7gHs73wELdeycvS48JfIos': 5,
+		'2w2lfwoTELQyN940qM7Nfd': 5 
+	},
+  	'5eba2245d2d1862940dc2b2b': { 
+		'7gHs73wELdeycvS48JfIos': 5, 
+		'2w2lfwoTELQyN940qM7Nfd': 5 
 	}
-};
+}
 
 var euclidean_score = function(dataset, p1, p2) {
 	var existp1p2 = {}; //store item existing in both item
@@ -93,7 +112,7 @@ var len = function(obj) {
 	return len;
 };
 
-euclidean_score(dataset, "Lisa Rose", "Jack Matthews");
+// euclidean_score(dataset, "Lisa Rose", "Jack Matthews");
 
 var pearson_correlation = function(dataset, p1, p2) {
 	var existp1p2 = {};
@@ -120,10 +139,12 @@ var pearson_correlation = function(dataset, p1, p2) {
 		p2_sq_sum += Math.pow(dataset[p2][item], 2);
 		prod_p1p2 += dataset[p1][item] * dataset[p2][item];
 	}
+	console.log(p1_sum, p2_sum, p1_sq_sum, p2_sq_sum, prod_p1p2)
 	var numerator = prod_p1p2 - (p1_sum * p2_sum) / num_existence;
 	var st1 = p1_sq_sum - Math.pow(p1_sum, 2) / num_existence;
 	var st2 = p2_sq_sum - Math.pow(p2_sum, 2) / num_existence;
 	var denominator = Math.sqrt(st1 * st2);
+	console.log(numerator, st1, st2, denominator, num_existence)
 	if (denominator == 0) return 0;
 	else {
 		var val = numerator / denominator;
@@ -150,7 +171,7 @@ var similar_user = function(dataset, person, num_user, distance) {
 	return score;
 };
 
-similar_user(dataset, "Jack Matthews", 3, pearson_correlation);
+// similar_user(dataset, "Jack Matthews", 3, pearson_correlation);
 //[ { val: 0.963795681875635, p: 'Gene Seymour' }, { val: 0.7470178808339965, p: 'Lisa Rose' }, { val: 0.66284898035987, p: 'Toby' } ]
 
 var recommendation_eng = function(dataset, person, distance) {
@@ -181,7 +202,7 @@ var recommendation_eng = function(dataset, person, distance) {
 	for (var other in dataset) {
 		if (other === person) continue;
 		var similar = distance(dataset, person, other);
-
+		// console.log(similar)
 		if (similar <= 0) continue;
 		for (var item in dataset[other]) {
 			if (!(item in dataset[person]) || dataset[person][item] == 0) {
@@ -191,10 +212,10 @@ var recommendation_eng = function(dataset, person, distance) {
 			}
 		}
 	}
-
 	for (var item in totals) {
 		//this what the setter function does
 		//so we have to find a way to avoid the function in the object
+		// console.log(typeof totals[item])
 		if (typeof totals[item] != "function") {
 			var val = totals[item] / simsum[item];
 			rank_lst.push({ val: val, items: item });
@@ -209,3 +230,7 @@ var recommendation_eng = function(dataset, person, distance) {
 	}
 	return [rank_lst, recommend];
 };
+
+
+// console.log(recommendation_eng(dataset, 'Jack Matthews', pearson_correlation));
+console.log(recommendation_eng(dataset, '5eb8d6b376d6b10358d66212', pearson_correlation));
