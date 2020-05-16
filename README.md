@@ -22,7 +22,7 @@ MusicBolt/server> `npm start`
 ## Preview
 
  * Landing Page
-![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/landing.PNG)
+![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/landing.png)
 
  * Signup
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/signup.PNG)
