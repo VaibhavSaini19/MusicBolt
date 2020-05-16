@@ -6,8 +6,8 @@ import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
 	const [values, setValues] = useState({
-		email: "a@a.com",
-		password: "aaa",
+		email: "",
+		password: "",
 		error: "",
 		loading: false,
 		didRedirect: false
@@ -70,6 +70,7 @@ const Signin = () => {
 									className="form-control"
 									type="email"
 									value={email}
+									placeholder="johnDoe@example.com"
 								/>
 							</div>
 							<div className="form-group">
@@ -81,6 +82,7 @@ const Signin = () => {
 									className="form-control"
 									type="password"
 									value={password}
+									placeholder="***"
 								/>
 							</div>
 							<button onClick={onSubmit} className="btn btn-success btn-block">
