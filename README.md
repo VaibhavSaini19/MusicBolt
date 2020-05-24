@@ -21,28 +21,31 @@ MusicBolt/server> `npm start`
  
 ## Preview
 
- * Landing Page
+### Landing Page
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/landing.png)
 
- * Signup
+### Signup
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/signup.PNG)
 
- * Tracks
+### Tracks
 Latest tracks from various artists fetched thorugh Spotify API
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/tracks.png)
 
- * Favourites
+### Favourites
 Tracks added to favourites list by user
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/favs.PNG)
 
- * Recommendation
+### Recommendation
+ 
 Based on similar users, tracks are recommended to user
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/recommendations.PNG)
 
- * Search
+### Search
+ 
 Search any song / artist / album across countries or languages
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/search.PNG)
 
- * Dashboard
+### Dashboard
+ 
 Just a simple dashboard for admin user
 ![](https://github.com/VaibhavSaini19/MusicBolt/blob/master/screenshots/adminDashboard.png)
